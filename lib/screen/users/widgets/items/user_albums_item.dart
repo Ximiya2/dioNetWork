@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../models/AlbumsModel.dart';
-import '../../../service/album_service.dart';
-import '../../../service/comment_service.dart';
-import '../../../service/utils_service.dart';
-import '../../users/userAlbum_page.dart';
+import '../../../../models/AlbumsModel.dart';
+import '../../userAlbum_page.dart';
+import '../../userPhotoPage.dart';
 
-Widget AlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit) {
+Widget UserAlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit) {
   return Column(
     children: [
       Row(
@@ -32,10 +30,10 @@ Widget AlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UserAlbumsPage(id: albums.id)),
+                      MaterialPageRoute(builder: (context) => UserPhotoPage(id: albums.id)),
                     );
                   },
-                  icon: Icon(Icons.comment)),
+                  icon: Icon(Icons.arrow_forward_rounded,)),
             ],
           ),
           // Text(
@@ -47,6 +45,7 @@ Widget AlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit
           //   ),),
         ],
       ),
+
     ],
   );
 }

@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../models/commentModel.dart';
-import '../../../service/comment_service.dart';
-import '../../../service/utils_service.dart';
+import '../../../../models/commentModel.dart';
 
-Widget CommetItem({required BuildContext context, required CommentModel comment,
-    required void Function() edit}) {
+Widget UserCommetItem({required BuildContext context, required CommentModel comment,}) {
   return Column(
     children: [
       SizedBox(
@@ -54,24 +51,7 @@ Widget CommetItem({required BuildContext context, required CommentModel comment,
                 color: Colors.black38
             ),),
           ),
-          Column(
-            children: [
-              IconButton(
-                  onPressed: edit,
-                  icon: Icon(Icons.edit)),
-              SizedBox(height: 10,),
-              IconButton(
-                  onPressed: () async {
-                    bool result = await GetCommetService.deleteCommet(comment.id);
-                    if(result){
-                      Utils.snackBarSucces('Deleted successfully', context);
-                    } else {
-                      Utils.snackBarError('Someting is wrong', context);
-                    }
-                  },
-                  icon: Icon(Icons.delete)),
-            ],
-          )
+
         ],
       ),
     ],

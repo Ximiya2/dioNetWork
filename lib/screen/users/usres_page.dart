@@ -1,4 +1,4 @@
-import 'package:dio_net_work/screen/users/usersPageItem.dart';
+import 'package:dio_net_work/screen/users/userView.dart';
 import 'package:dio_net_work/screen/users/widgets/users_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +39,12 @@ class _UsersPageState extends State<UsersPage> {
                             onTap: (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => UsersPageItem(id: snapshot.data![i].id,)),
+                                MaterialPageRoute(builder: (context) => UserView(id: snapshot.data![i].id,)),
                               );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => UsersPageItem(id: snapshot.data![i].id,)),
+                              // );
                             },
                             child: UsersItem(context, snapshot.data![i],)),
                       );

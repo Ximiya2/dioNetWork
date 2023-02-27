@@ -67,8 +67,8 @@ class _CommentPageState extends State<CommentPage> {
                     itemBuilder: (context, i){
                       return Padding(
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: CommetItem(context, snapshot.data![i],
-                            () {
+                        child: CommetItem(context: context,comment:  snapshot.data![i],
+                            edit: () {
                           commentIdCtr.text = snapshot.data![i].id.toString();
                           nameCtr.text = snapshot.data![i].name;
                           emailCtr.text = snapshot.data![i].email;
