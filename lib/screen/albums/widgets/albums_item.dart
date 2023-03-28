@@ -1,9 +1,7 @@
+import 'package:dio_net_work/screen/photo/photo_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../models/AlbumsModel.dart';
-import '../../../service/album_service.dart';
-import '../../../service/comment_service.dart';
-import '../../../service/utils_service.dart';
 import '../../users/userAlbum_page.dart';
 
 Widget AlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit) {
@@ -38,6 +36,10 @@ Widget AlbumsItem(BuildContext context, AlbumsModel albums, void Function() edit
                   icon: Icon(Icons.comment)),
             ],
           ),
+          IconButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> PhotoPage(id: albums.userId,)));
+                }, icon: Icon(Icons.arrow_forward_ios))
           // Text(
           //   albums.userId.toString(),
           //   style: TextStyle(

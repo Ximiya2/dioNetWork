@@ -1,13 +1,16 @@
+import 'package:dio_net_work/screen/comment/comment_page.dart';
 import 'package:dio_net_work/screen/posts/widgets/post_item.dart';
+import 'package:dio_net_work/service/comment_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../models/commentModel.dart';
 import '../../models/postModel.dart';
 import '../../service/post_service.dart';
 import '../../service/utils_service.dart';
 
 class PostsPage extends StatefulWidget {
-  const PostsPage({Key? key}) : super(key: key);
-
+   PostsPage({Key? key}) : super(key: key);
+  //CommentModel? comment;
   @override
   State<PostsPage> createState() => _PostsPageState();
 }
@@ -22,6 +25,7 @@ class _PostsPageState extends State<PostsPage> {
   //   super.initState();
   //   GetPostService.getUser();
   // }
+  //  CommentModel? comment = GetCommetService.getCommet();
 
   @override
   Widget build(BuildContext context) {
@@ -63,20 +67,21 @@ class _PostsPageState extends State<PostsPage> {
               if(snapshot.hasData){
                 return ListView.builder(
                     itemCount: snapshot.data!.length,
-                    itemBuilder: (context, i){
+                    itemBuilder: (context, index){
                       return Padding(
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: postItem(context: context, post: snapshot.data![i],
+                        child: postItem(context: context, post: snapshot.data![index],
+                            comment: snapshot.data![index].id,
                             edit: () {
-                          userIdCtr.text = snapshot.data![i].userId.toString();
-                          titleCtr.text = snapshot.data![i].title;
-                          bodyCtr.text = snapshot.data![i].body;
+                          userIdCtr.text = snapshot.data![index].userId.toString();
+                          titleCtr.text = snapshot.data![index].title;
+                          bodyCtr.text = snapshot.data![index].body;
                           _showBottomSheet(context,
                               () async {
                                 if(userIdCtr.text.isNotEmpty && titleCtr.text.isNotEmpty && bodyCtr.text.isNotEmpty) {
                                   PostModel newPost = PostModel(
                                       userId: int.parse(userIdCtr.text),
-                                      id: snapshot.data![i].id,
+                                      id: snapshot.data![index].id,
                                       title: titleCtr.text,
                                       body: bodyCtr.text);
                                   bool result = await GetPostService.editPost(newPost);

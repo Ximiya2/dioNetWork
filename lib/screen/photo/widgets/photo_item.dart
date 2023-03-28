@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/photosModel.dart';
 
-Widget PhotoItem( PhotosModel photo,) {
+Widget PhotoItem( PhotosModel photo, {required int id}) {
   return Container(
     margin: EdgeInsets.all(8),
     padding: EdgeInsets.all(5),

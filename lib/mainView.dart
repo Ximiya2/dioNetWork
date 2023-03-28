@@ -14,102 +14,138 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
+
+  var _pages = [
+    PostsPage(),
+    UsersPage(),
+    AlbumsPage(),
+  ];
+
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Main'),),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(width: double.infinity,),
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UsersPage()));
-            },
-            child: Container(
-              margin: EdgeInsets.all(15),
-              height: 60,
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: Text('Users')),
-            ),
+      // appBar: AppBar(title: Text('Main'),),
+      body: _pages[currentPage],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPage,
+        onTap: (i){
+          setState(() {
+            currentPage = i;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Colors.black,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Posts'
           ),
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PostsPage()));
-            },
-            child: Container(
-              margin: EdgeInsets.all(15),
-              height: 60,
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: Text('Posts')),
-            ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Users'
           ),
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CommentPage()));
-            },
-            child: Container(
-              margin: EdgeInsets.all(15),
-              height: 60,
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: Text('Comment')),
-            ),
-          ),
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PhotoPage()));
-            },
-            child: Container(
-              margin: EdgeInsets.all(15),
-              height: 60,
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: Text('Photo')),
-            ),
-          ),
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AlbumsPage()));
-            },
-            child: Container(
-              margin: EdgeInsets.all(15),
-              height: 60,
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: Text('Albums')),
-            ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.photo_album),
+              label: 'Albums'
           ),
         ],
       ),
+
+      // body: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   children: [
+      //     Container(width: double.infinity,),
+      //     InkWell(
+      //       onTap: (){
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => UsersPage()));
+      //       },
+      //       child: Container(
+      //         margin: EdgeInsets.all(15),
+      //         height: 60,
+      //         width: MediaQuery.of(context).size.width*0.6,
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //           borderRadius: BorderRadius.circular(20),
+      //         ),
+      //         child: Center(child: Text('Users')),
+      //       ),
+      //     ),
+      //     InkWell(
+      //       onTap: (){
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => PostsPage()));
+      //       },
+      //       child: Container(
+      //         margin: EdgeInsets.all(15),
+      //         height: 60,
+      //         width: MediaQuery.of(context).size.width*0.6,
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //           borderRadius: BorderRadius.circular(20),
+      //         ),
+      //         child: Center(child: Text('Posts')),
+      //       ),
+      //     ),
+      //     InkWell(
+      //       onTap: (){
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => CommentPage()));
+      //       },
+      //       child: Container(
+      //         margin: EdgeInsets.all(15),
+      //         height: 60,
+      //         width: MediaQuery.of(context).size.width*0.6,
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //           borderRadius: BorderRadius.circular(20),
+      //         ),
+      //         child: Center(child: Text('Comment')),
+      //       ),
+      //     ),
+      //     InkWell(
+      //       onTap: (){
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => PhotoPage()));
+      //       },
+      //       child: Container(
+      //         margin: EdgeInsets.all(15),
+      //         height: 60,
+      //         width: MediaQuery.of(context).size.width*0.6,
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //           borderRadius: BorderRadius.circular(20),
+      //         ),
+      //         child: Center(child: Text('Photo')),
+      //       ),
+      //     ),
+      //     InkWell(
+      //       onTap: (){
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => AlbumsPage()));
+      //       },
+      //       child: Container(
+      //         margin: EdgeInsets.all(15),
+      //         height: 60,
+      //         width: MediaQuery.of(context).size.width*0.6,
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //           borderRadius: BorderRadius.circular(20),
+      //         ),
+      //         child: Center(child: Text('Albums')),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

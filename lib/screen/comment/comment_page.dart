@@ -1,4 +1,5 @@
 import 'package:dio_net_work/screen/comment/widgets/comment_item.dart';
+import 'package:dio_net_work/screen/posts/posts_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../models/commentModel.dart';
@@ -19,6 +20,12 @@ TextEditingController bodyCtr = TextEditingController();
 TextEditingController commentIdCtr = TextEditingController();
 
 class _CommentPageState extends State<CommentPage> {
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +83,13 @@ class _CommentPageState extends State<CommentPage> {
                           _showBottomSheet(context,
                               () async {
                                 if(nameCtr.text.isNotEmpty && emailCtr.text.isNotEmpty && bodyCtr.text.isNotEmpty) {
-                                  CommentModel newPost = CommentModel(
+                                  CommentModel newComment = CommentModel(
                                     postId: snapshot.data![i].postId,
                                       id: snapshot.data![i].id,
                                       email: emailCtr.text,
                                       name: nameCtr.text,
                                       body: bodyCtr.text, );
-                                  bool result = await GetCommetService.editComment(newPost);
-
+                                  bool result = await GetCommetService.editComment(newComment);
                                   if(result){
                                     Utils.snackBarSucces('Update successfully', context);
                                     Navigator.pop(context);

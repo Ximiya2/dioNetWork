@@ -31,7 +31,7 @@ class _UserPhotoPageState extends State<UserPhotoPage> {
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {
-                    return PhotoItem(snapshot.data![index]);
+                    return PhotoItem(snapshot.data![index], id: widget.id!);
                   },
                 );
               } else {

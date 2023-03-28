@@ -9,7 +9,7 @@ class GetCommetService {
   static GetCommetService get inheritance => _inheritance;
   GetCommetService._init();
 
-  static Future<List< CommentModel>?> getCommet() async {
+  static Future<List<CommentModel>?> getCommet() async {
     // Log.i('===============');
     try {
       Response res = await DioConfig.inheritentce.createRequest().get(Urls.getComment);
@@ -24,6 +24,36 @@ class GetCommetService {
         }
 
         return commetList;
+      } else {
+        Log.e('${res.statusMessage} ${res.statusCode}');
+      }
+    } on DioError catch (e) {
+      Log.e(e.toString());
+      if(e.response != null) {
+        Log.e(e.response!.toString());
+      } else {
+        rethrow;
+      }
+    } catch (e) {
+      Log.e(e.toString());
+
+    }
+    return null;
+  }
+
+  static Future<List<CommentModel>?> getPostComment(int id) async {
+    try {
+      Response res = await DioConfig.inheritentce.createRequest().get(Urls.getSingleUserComment + '?postId=${id}');
+      Log.i(res.data.toString());
+      Log.i(res.statusCode.toString());
+
+      if(res.statusCode == 200) {
+        List<CommentModel> userList = [];
+        for(var e in (res.data as List)) {
+          userList.add(CommentModel.fromJson(e));
+        }
+
+        return userList;
       } else {
         Log.e('${res.statusMessage} ${res.statusCode}');
       }

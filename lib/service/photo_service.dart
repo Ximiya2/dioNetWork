@@ -38,6 +38,36 @@ class GetPhotoService {
     }
     return null;
   }
+
+  static Future<List<PhotosModel>?> getSingleIdPhoto(int id) async {
+    try {
+      Response res = await DioConfig.inheritentce.createRequest().get(Urls.getSingleUserPhoto + '?albumId=$id');
+      Log.i(res.data.toString());
+      Log.i(res.statusCode.toString());
+
+      if(res.statusCode == 200) {
+        List<PhotosModel> photoList = [];
+        for(var e in (res.data as List)) {
+          photoList.add(PhotosModel.fromJson(e));
+        }
+
+        return photoList;
+      } else {
+        Log.e('${res.statusMessage} ${res.statusCode}');
+      }
+    } on DioError catch (e) {
+      Log.e(e.toString());
+      if(e.response != null) {
+        Log.e(e.response!.toString());
+      } else {
+        rethrow;
+      }
+    } catch (e) {
+      Log.e(e.toString());
+
+    }
+    return null;
+  }
   //
   // static Future<bool> createCommet(CommentModel newPost) async {
   //   try {
